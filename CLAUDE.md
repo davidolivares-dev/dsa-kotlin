@@ -54,11 +54,15 @@ See `ROADMAP.md` for the full topic sequence and phase rationale, and
 ## `NOTES.md` conventions
 
 Covers: what the structure/algorithm is, its invariants, complexity
-(time/space), when to reach for it. Ends with a **"Check Your
-Understanding"** section: a bank of 6-10 conceptual questions (invariants,
-complexity, edge cases — never "write the code for X"). Only a random
-subset gets asked per comprehension check, so revisiting a topic later
-doesn't mean reciting the same memorized answers.
+(time/space), when to reach for it. Include a diagram wherever it would
+make a concept clearer than prose alone — ASCII art for linear structures
+(arrays, linked lists, stacks, call stacks) and Mermaid diagrams for trees
+and graphs (GitHub renders Mermaid natively in Markdown, no extra
+tooling). Don't force a diagram where one doesn't add clarity. Ends with a
+**"Check Your Understanding"** section: a bank of 6-10 conceptual
+questions (invariants, complexity, edge cases — never "write the code for
+X"). Only a random subset gets asked per comprehension check, so
+revisiting a topic later doesn't mean reciting the same memorized answers.
 
 ## `TASK.md` conventions
 
