@@ -72,6 +72,13 @@ block for the user to reference when creating their own copy of the file.
 This is what to glance at mid-implementation instead of re-reading the
 lesson, and doubles as a cold-drill sheet on revisit.
 
+Where the decomposition into base case/recursive case (or the relevant
+invariant, for non-recursive structures) isn't obvious just from the
+behavior description, add a one-line framing question — not the answer,
+a pointed question that gives a concrete entry point instead of a blank
+page. Skip it where the spec already states the recursive relationship
+directly (e.g. Fibonacci's definition *is* its recursive case).
+
 ## Repo structure
 
 - Real Gradle Kotlin project. `./gradlew test` is the feedback loop —

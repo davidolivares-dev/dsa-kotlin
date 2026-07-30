@@ -11,8 +11,8 @@ its stub code, and a test file under the mirrored path in `src/test/kotlin/`.
 ## Core
 
 ### Phase 0 — Foundations
-- [ ] Complexity analysis (time/space, amortized cost)
-- [ ] Recursion refresher
+- [x] Complexity analysis (time/space, amortized cost)
+- [x] Recursion refresher
 
 ### Phase 1 — Linear structures
 - [ ] Arrays & Strings (in-place techniques)
