@@ -15,7 +15,7 @@ its stub code, and a test file under the mirrored path in `src/test/kotlin/`.
 - [x] Recursion refresher
 
 ### Phase 1 — Linear structures
-- [ ] Arrays & Strings (in-place techniques)
+- [x] Arrays & Strings (in-place techniques)
 - [ ] Singly Linked List
 - [ ] Doubly Linked List
 - [ ] Stack
