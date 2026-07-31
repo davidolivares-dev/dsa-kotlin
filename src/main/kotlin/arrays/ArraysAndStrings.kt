@@ -46,5 +46,5 @@ fun removeDuplicates(arr: IntArray): Int {
         }
         next++
     }
-    return curr +1
+    return curr + 1
 }
