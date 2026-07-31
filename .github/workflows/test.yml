@@ -16,3 +16,4 @@ jobs:
           java-version: "21"
           cache: gradle
       - run: ./gradlew test
+      - run: ./gradlew ktlintCheck

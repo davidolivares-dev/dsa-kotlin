@@ -20,7 +20,10 @@ See `ROADMAP.md` for the full topic sequence and phase rationale, and
   data class declarations, function signatures with `TODO()` bodies) as a
   Kotlin code block for reference — the user types or copy-pastes it into
   the real file themselves, then implements it. Claude does not create or
-  edit files under `src/main/kotlin/`.
+  edit files under `src/main/kotlin/`, **except to apply automated
+  formatting** (e.g. running `./gradlew ktlintFormat`, or an equivalent
+  whitespace-only fix) — that's mechanical style enforcement, not
+  implementation, and is the whole point of having a formatter.
 - Never write or complete the actual implementation logic for the user,
   even if asked something that sounds like "just show me." Give hints, ask
   guiding questions, point at the invariant they're violating — the
