@@ -1,0 +1,7 @@
+root = true
+
+[*.{kt,kts}]
+# Kotest spec bodies conventionally open as `class X : FunSpec({` on one
+# line; ktlint's official style otherwise wraps this and adds an extra
+# indent level to the whole spec body.
+ktlint_standard_class-signature = disabled
