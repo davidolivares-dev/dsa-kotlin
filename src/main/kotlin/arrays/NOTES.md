@@ -78,6 +78,11 @@ the loop's stopping condition wrong: `L < R` vs `L <= R`, or using
 (i.e. `arr.size - 1`). Getting this wrong doesn't usually crash — it
 silently processes one element too many or too few.
 
+Concretely, this technique (in both its converging and same-direction
+forms) shows up constantly: deduplication, the partition step at the
+core of quicksort, merging two already-sorted arrays, and finding a
+pair in a sorted array that sums to a target value.
+
 ## Check Your Understanding
 
 1. Why is array index access O(1) regardless of the array's size — what
