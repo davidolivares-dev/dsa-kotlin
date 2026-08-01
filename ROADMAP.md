@@ -16,7 +16,7 @@ its stub code, and a test file under the mirrored path in `src/test/kotlin/`.
 
 ### Phase 1 — Linear structures
 - [x] Arrays & Strings (in-place techniques)
-- [ ] Singly Linked List
+- [x] Singly Linked List
 - [ ] Doubly Linked List
 - [ ] Stack
 - [ ] Queue (array-based + linked, circular buffer)
