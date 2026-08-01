@@ -3,7 +3,7 @@
 Build a singly linked list from scratch — the node type, and the core
 operations covering head insertion, tail insertion, deletion (including
 the invariant-preserving kind), search, and reversal — from
-[`NOTES.md`](NOTES.md).
+[`SINGLY_LINKED_LIST_NOTES.md`](SINGLY_LINKED_LIST_NOTES.md).
 
 Create `src/main/kotlin/linkedlist/SinglyLinkedList.kt` yourself (copy the
 stub below in, then implement each function). Values are plain `Int`s —
@@ -36,10 +36,10 @@ in — leave those alone), preserving the connectivity of every node around
 it. Returns `true` if a node was removed, `false` if `value` never
 appears.
 *Framing: this is exactly the "wrong pointer order" failure mode from
-`NOTES.md` waiting to happen. Before you unlink the target node, what
-reference do you need to already be holding? And what's different about
-removing the head node specifically — is there a node before it to
-update at all?*
+`SINGLY_LINKED_LIST_NOTES.md` waiting to happen. Before you unlink the
+target node, what reference do you need to already be holding? And
+what's different about removing the head node specifically — is there
+a node before it to update at all?*
 
 **`contains(value: Int): Boolean`**
 Returns whether `value` appears anywhere in the list. Plain O(n) walk from

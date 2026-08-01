@@ -1,6 +1,6 @@
 # Glossary
 
-Terms used across this repo's `NOTES.md` files that aren't self-explanatory.
+Terms used across this repo's `*_NOTES.md` files that aren't self-explanatory.
 Alphabetical. Add to this as new topics introduce new vocabulary.
 
 **Amortized complexity** — the average cost of an operation over a

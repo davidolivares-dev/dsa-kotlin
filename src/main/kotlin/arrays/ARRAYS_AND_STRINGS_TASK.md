@@ -1,7 +1,7 @@
 # Task: Arrays & Strings In-Place
 
 Four exercises applying the two-pointer technique and in-place mutation
-from [`NOTES.md`](NOTES.md).
+from [`ARRAYS_AND_STRINGS_NOTES.md`](ARRAYS_AND_STRINGS_NOTES.md).
 
 Create `src/main/kotlin/arrays/ArraysAndStrings.kt` yourself (copy the stub
 below in, then implement each function).
@@ -17,7 +17,7 @@ should be left unchanged, not throw).
 Same idea, on a `CharArray` instead of an `IntArray` — reverses in place.
 `reverseString(['h','e','l','l','o'])` leaves it as `['o','l','l','e','h']`.
 This takes a `CharArray` rather than a `String` for a reason you already
-know from `NOTES.md` — think about why before you start.
+know from `ARRAYS_AND_STRINGS_NOTES.md` — think about why before you start.
 
 **`isPalindrome(s: String): Boolean`**
 Checks whether `s` reads the same forwards and backwards — same contract

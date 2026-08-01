@@ -2,7 +2,7 @@
 
 References: [`GLOSSARY.md`](../../../../GLOSSARY.md) ·
 [`ROADMAP.md`](../../../../ROADMAP.md) ·
-[Arrays & Strings notes](../arrays/NOTES.md)
+[Arrays & Strings notes](../arrays/ARRAYS_AND_STRINGS_NOTES.md)
 
 ## What it is
 
