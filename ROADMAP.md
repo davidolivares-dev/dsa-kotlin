@@ -5,8 +5,9 @@ The authoritative learning order for this repo. Package names under
 can't start with a digit), so **this document — not folder names — is what
 defines the sequence.**
 
-Check items off as you complete them. Each topic gets a `NOTES.md` next to
-its stub code, and a test file under the mirrored path in `src/test/kotlin/`.
+Check items off as you complete them. Each topic gets a `<TOPIC>_NOTES.md`
+next to its stub code, and a test file under the mirrored path in
+`src/test/kotlin/`.
 
 ## Core
 

@@ -3,7 +3,7 @@
 Implement four small recursive functions. Each is deliberately simple —
 the point isn't the problem, it's building the reflex of identifying the
 base case and recursive case correctly before writing anything else. See
-[`NOTES.md`](NOTES.md) for the concepts these draw on.
+[`FOUNDATIONS_NOTES.md`](FOUNDATIONS_NOTES.md) for the concepts these draw on.
 
 Create `src/main/kotlin/foundations/Recursion.kt` yourself (copy the stub
 below in, then implement each function — don't just fill in `TODO()`

@@ -11,19 +11,20 @@ building Kotlin fluency, so occasional syntax friction is expected and
 normal, separate from the DSA learning goal.
 
 See `ROADMAP.md` for the full topic sequence and phase rationale, and
-`GLOSSARY.md` for terminology used in `NOTES.md` files.
+`GLOSSARY.md` for terminology used in `*_NOTES.md` files.
 
 ## Division of labor — do not blur this line
 
 - **The user writes all code that ends up in `src/main/kotlin/`,
-  including the stub itself.** `TASK.md` contains an example stub (class/
-  data class declarations, function signatures with `TODO()` bodies) as a
-  Kotlin code block for reference — the user types or copy-pastes it into
-  the real file themselves, then implements it. Claude does not create or
-  edit files under `src/main/kotlin/`, **except to apply automated
-  formatting** (e.g. running `./gradlew ktlintFormat`, or an equivalent
-  whitespace-only fix) — that's mechanical style enforcement, not
-  implementation, and is the whole point of having a formatter.
+  including the stub itself.** `<TOPIC>_TASK.md` contains an example stub
+  (class/data class declarations, function signatures with `TODO()`
+  bodies) as a Kotlin code block for reference — the user types or
+  copy-pastes it into the real file themselves, then implements it. Claude
+  does not create or edit files under `src/main/kotlin/`, **except to
+  apply automated formatting** (e.g. running `./gradlew ktlintFormat`, or
+  an equivalent whitespace-only fix) — that's mechanical style
+  enforcement, not implementation, and is the whole point of having a
+  formatter.
 - Never write or complete the actual implementation logic for the user,
   even if asked something that sounds like "just show me." Give hints, ask
   guiding questions, point at the invariant they're violating — the
@@ -34,27 +35,27 @@ See `ROADMAP.md` for the full topic sequence and phase rationale, and
   generic example of that construct is fine — unrelated to their specific
   stub, not a fill-in-the-blank of it. The line is: syntax examples teach a
   language feature; solutions solve the assigned problem.
-- **Claude writes:** `NOTES.md`, `TASK.md`, and the test file under
-  `src/test/kotlin/`. The test file is expected to fail to compile until
-  the user's stub exists with matching signatures — that's the first red
-  state, before any assertions even run.
+- **Claude writes:** `<TOPIC>_NOTES.md`, `<TOPIC>_TASK.md`, and the test
+  file under `src/test/kotlin/`. The test file is expected to fail to
+  compile until the user's stub exists with matching signatures — that's
+  the first red state, before any assertions even run.
 - **Claude reviews:** after the user implements a stub, walk through what
   the tests cover and why, so coverage is understood, not just "passing."
 
 ## Workflow per topic
 
-1. User reads `NOTES.md`.
-2. **Comprehension check**: before handing over `TASK.md`, ask ~3-4
-   questions pulled at random from that topic's question bank (see below).
-   Conversational, not written/graded — keep going on a question until the
-   answer shows real understanding of *why*, not just *what*. If the user
-   wants to skip straight to code and learn by doing, that's fine too;
-   don't block on it.
-3. User creates the stub file in `src/main/kotlin/` from `TASK.md`'s
-   example, then implements it.
+1. User reads `<TOPIC>_NOTES.md`.
+2. **Comprehension check**: before handing over `<TOPIC>_TASK.md`, ask
+   ~3-4 questions pulled at random from that topic's question bank (see
+   below). Conversational, not written/graded — keep going on a question
+   until the answer shows real understanding of *why*, not just *what*.
+   If the user wants to skip straight to code and learn by doing, that's
+   fine too; don't block on it.
+3. User creates the stub file in `src/main/kotlin/` from
+   `<TOPIC>_TASK.md`'s example, then implements it.
 4. Claude writes the test file, then walks through what it covers.
 
-## `NOTES.md` conventions
+## `<TOPIC>_NOTES.md` conventions
 
 Covers: what the structure/algorithm is, its invariants, complexity
 (time/space), when to reach for it. Include a diagram wherever it would
@@ -67,7 +68,7 @@ questions (invariants, complexity, edge cases — never "write the code for
 X"). Only a random subset gets asked per comprehension check, so
 revisiting a topic later doesn't mean reciting the same memorized answers.
 
-## `TASK.md` conventions
+## `<TOPIC>_TASK.md` conventions
 
 The work order: concrete list of operations/functions to implement, their
 expected behavior and edge cases, and an example stub as a Kotlin code
@@ -90,8 +91,12 @@ directly (e.g. Fibonacci's definition *is* its recursive case).
   contain hyphens, so topic order lives in `ROADMAP.md`, not in directory
   names. Packages are grouped by category (`foundations`, `linkedlist`,
   `trees`, `graphs`, …).
-- Each topic's `NOTES.md` and `TASK.md` live next to its stub `.kt` file(s)
-  under `src/main/kotlin/<package>/`. The matching test file lives under
+- Each topic's `<TOPIC>_NOTES.md` and `<TOPIC>_TASK.md` (SCREAMING_SNAKE_CASE,
+  matching `ROADMAP.md`/`GLOSSARY.md`) live next to its stub `.kt` file(s)
+  under `src/main/kotlin/<package>/`. Naming is scoped to the topic, not the
+  package, since multiple topics can share a package folder (e.g.
+  `linkedlist/` holding both Singly and Doubly Linked List) without their
+  docs colliding. The matching test file lives under
   `src/test/kotlin/<package>/`.
 - Test framework: Kotest (`FunSpec` style unless a topic's shape calls for
   something else).
