@@ -11,7 +11,11 @@ building Kotlin fluency, so occasional syntax friction is expected and
 normal, separate from the DSA learning goal.
 
 See `ROADMAP.md` for the full topic sequence and phase rationale, and
-`GLOSSARY.md` for terminology used in `*_NOTES.md` files.
+`GLOSSARY.md` for terminology used in `*_NOTES.md` files. Each
+`GLOSSARY.md` term must be a `##` heading, not a bold paragraph —
+`*_NOTES.md` files link into specific terms via anchors (e.g.
+`GLOSSARY.md#amortized-complexity`), and GitHub only auto-generates
+anchor IDs for real headings.
 
 ## Division of labor — do not blur this line
 
