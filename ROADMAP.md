@@ -20,7 +20,7 @@ next to its stub code, and a test file under the mirrored path in
 - [x] Singly Linked List
 - [x] Doubly Linked List
 - [x] Stack
-- [ ] Queue (array-based + linked, circular buffer)
+- [x] Queue (array-based + linked, circular buffer)
 
 ### Phase 2 — Hashing
 - [ ] Hash Table (collision handling, resizing)
