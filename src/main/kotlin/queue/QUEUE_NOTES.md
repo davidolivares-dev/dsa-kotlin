@@ -16,9 +16,12 @@ whoever arrived *most* recently, a queue always serves whoever arrived
 *least* recently.
 
 ```
-enqueue(1)   enqueue(2)   enqueue(3)   dequeue() -> 1
-front  back  front  back  front  back  front  back
- [1]         [1][2]       [1][2][3]       [2][3]
+enqueue(1)    enqueue(2)    enqueue(3)    dequeue() -> 1
+
+[1]           [1][2]        [1][2][3]     [2][3]
+ fb            f  b          f     b       f  b
+
+f = front (next to leave)   b = back (most recently added)
 ```
 
 Like a stack, a queue is an **abstract data type**, not one specific

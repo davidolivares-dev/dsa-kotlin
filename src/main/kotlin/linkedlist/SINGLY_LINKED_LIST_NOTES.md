@@ -14,8 +14,8 @@ each node pointing to the next, until the last node points to `null`.
 
 ```
 head
- |
- v
+  |
+  v
 [ 1 | *]--->[ 2 | *]--->[ 3 | null]
 ```
 

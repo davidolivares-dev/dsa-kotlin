@@ -39,6 +39,16 @@ anchor IDs for real headings.
   generic example of that construct is fine — unrelated to their specific
   stub, not a fill-in-the-blank of it. The line is: syntax examples teach a
   language feature; solutions solve the assigned problem.
+- **Post-implementation refactors are fair game, concretely.** Once the
+  user has a *working, correct* implementation of a function, Claude may
+  suggest a more idiomatic version showing the actual rewritten code, and
+  may apply it to the file on request. The learning happens in getting it
+  correct, so hedging a style suggestion into a generic analogue at that
+  point is unhelpful, not principled. This does **not** loosen the rule
+  above: never write a
+  first implementation, never fill in a `TODO()`, and never "refactor" a
+  function that doesn't work yet, since that's just supplying the
+  solution with extra steps.
 - **Claude writes:** `<TOPIC>_NOTES.md`, `<TOPIC>_TASK.md`, and the test
   file under `src/test/kotlin/`. The test file is expected to fail to
   compile until the user's stub exists with matching signatures — that's
@@ -111,6 +121,33 @@ directly (e.g. Fibonacci's definition *is* its recursive case).
   wrapped at 72 chars.
 - No `Co-Authored-By` trailer.
 - Daily commits are the expected cadence.
+
+## PR review
+
+The user reviews via GitHub PR comments, then names the PR to address.
+`gh` is installed and authenticated with `repo` scope, so Claude can
+both read comments and reply to them.
+
+Comments live at **three** separate endpoints — check all three, since
+it's easy to address the inline ones and miss a summary:
+
+```
+gh api repos/{owner}/{repo}/pulls/{n}/comments    # inline, on specific lines
+gh api repos/{owner}/{repo}/pulls/{n}/reviews     # overall review summaries
+gh api repos/{owner}/{repo}/issues/{n}/comments   # the Conversation tab
+```
+
+Reply in-thread rather than only summarizing in chat, so the PR keeps a
+self-contained record:
+
+```
+gh api repos/{owner}/{repo}/pulls/{n}/comments/{comment-id}/replies -f body='...'
+```
+
+Answer the question even when no code change results — several review
+comments are "what does this do?" rather than "change this." Unsubmitted
+review drafts are invisible to the API, so if the user expects comments
+and none appear, they likely haven't submitted the review yet.
 
 ## Shell commands
 

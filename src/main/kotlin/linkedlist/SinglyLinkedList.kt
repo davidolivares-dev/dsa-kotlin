@@ -26,7 +26,7 @@ class SinglyLinkedList {
     }
 
     fun deleteFirst(): Int {
-        val curr = head ?: throw NoSuchElementException()
+        val curr = head ?: throw NoSuchElementException("List is empty")
         head = curr.next
         return curr.value
     }

@@ -50,12 +50,14 @@ Each recursive call adds a frame to the call stack, which only unwinds
 `factorial(4)`:
 
 ```
-call stack grows down --v         unwinds back up, multiplying --^
+      calls go deeper   returns unwind back up
+      |                 ^
+      v                 |
 
-factorial(4)                                             = 4 * 6  = 24
-  factorial(3)                                            = 3 * 2 = 6
-    factorial(2)                                          = 2 * 1 = 2
-      factorial(1)  -> base case, returns 1 directly       = 1
+factorial(4)            = 4 * 6 = 24
+  factorial(3)          = 3 * 2 = 6
+    factorial(2)        = 2 * 1 = 2
+      factorial(1)      = 1   (base case, returns directly)
 ```
 
 Four frames are on the stack simultaneously at the deepest point, before
