@@ -23,7 +23,7 @@ next to its stub code, and a test file under the mirrored path in
 - [x] Queue (array-based + linked, circular buffer)
 
 ### Phase 2 — Hashing
-- [ ] Hash Table (collision handling, resizing)
+- [x] Hash Table (collision handling, resizing)
 - [ ] Hash Set
 
 ### Phase 3 — Trees

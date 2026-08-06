@@ -40,21 +40,16 @@ anchor IDs for real headings.
   stub, not a fill-in-the-blank of it. The line is: syntax examples teach a
   language feature; solutions solve the assigned problem.
 - **Post-implementation refactors are fair game, concretely.** Once the
-  user has a *working, correct* implementation of a function, Claude may
-  suggest a more idiomatic version showing the actual rewritten code, and
-  may apply it to the file on request. The learning happens in getting it
-  correct, so hedging a style suggestion into a generic analogue at that
-  point is unhelpful, not principled. This does **not** loosen the rule
-  above: never write a
-  first implementation, never fill in a `TODO()`, and never "refactor" a
-  function that doesn't work yet, since that's just supplying the
-  solution with extra steps.
+  user has a *working, correct* implementation, Claude may show the
+  actual rewritten code and apply it on request. The learning happens in
+  getting it correct, so hedging into a generic analogue at that point is
+  unhelpful, not principled. The rules above still hold for anything that
+  doesn't work yet — "refactoring" a broken function is just supplying
+  the solution with extra steps.
 - **Claude writes:** `<TOPIC>_NOTES.md`, `<TOPIC>_TASK.md`, and the test
   file under `src/test/kotlin/`. The test file is expected to fail to
   compile until the user's stub exists with matching signatures — that's
   the first red state, before any assertions even run.
-- **Claude reviews:** after the user implements a stub, walk through what
-  the tests cover and why, so coverage is understood, not just "passing."
 
 ## Workflow per topic
 
@@ -67,7 +62,8 @@ anchor IDs for real headings.
    fine too; don't block on it.
 3. User creates the stub file in `src/main/kotlin/` from
    `<TOPIC>_TASK.md`'s example, then implements it.
-4. Claude writes the test file, then walks through what it covers.
+4. Claude writes the test file, then walks through what it covers and
+   why — so coverage is understood, not just "passing."
 
 ## `<TOPIC>_NOTES.md` conventions
 
@@ -79,8 +75,8 @@ and graphs (GitHub renders Mermaid natively in Markdown, no extra
 tooling). Don't force a diagram where one doesn't add clarity. Ends with a
 **"Check Your Understanding"** section: a bank of 6-10 conceptual
 questions (invariants, complexity, edge cases — never "write the code for
-X"). Only a random subset gets asked per comprehension check, so
-revisiting a topic later doesn't mean reciting the same memorized answers.
+X"). The bank is deliberately larger than any one check uses, so
+revisiting a topic later isn't reciting memorized answers.
 
 ## `<TOPIC>_TASK.md` conventions
 
@@ -121,6 +117,26 @@ directly (e.g. Fibonacci's definition *is* its recursive case).
   wrapped at 72 chars.
 - No `Co-Authored-By` trailer.
 - Daily commits are the expected cadence.
+- **Don't restate in a commit what the notes or tests already cover.**
+  Language gotchas, complexity explanations, and how a structure works
+  belong in `<TOPIC>_NOTES.md`/`<TOPIC>_TASK.md`; edge cases belong in
+  the test file. A commit body is for what changed and *why the code
+  looks the way it does* — decisions and rejected alternatives that
+  aren't visible in the diff. If a paragraph could sit unchanged in the
+  notes, it belongs there instead.
+
+## PR description
+
+One commit per PR — squash locally before pushing rather than stacking
+follow-up commits. Three sections, in this order, and nothing else:
+
+1. `## <Structure or algorithm name>` — a short paragraph on what it is
+   and what problem it solves. Enough that someone who hasn't read the
+   notes knows what they're looking at.
+2. `## Changes` — a table of the files touched and what each one is.
+3. `## Design notes` — the decisions worth explaining: alternatives
+   rejected and why, trade-offs, and any language traps that failed
+   quietly rather than crashing.
 
 ## PR review
 
