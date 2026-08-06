@@ -5,3 +5,10 @@ root = true
 # line; ktlint's official style otherwise wraps this and adds an extra
 # indent level to the whole spec body.
 ktlint_standard_class-signature = disabled
+
+# ktlint's official style forces a multiline signature at 2+ parameters,
+# which would split even `fun put(key: Int, value: Int)` across four
+# lines and contradict the one-line stubs in every *_TASK.md. Unsetting
+# the count-based trigger; signatures still wrap when they exceed the
+# max line length, which is the case actually worth wrapping for.
+ktlint_function_signature_rule_force_multiline_when_parameter_count_greater_or_equal_than = unset
