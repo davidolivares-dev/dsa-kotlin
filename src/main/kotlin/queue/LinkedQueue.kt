@@ -20,16 +20,16 @@ class LinkedQueue {
     }
 
     fun dequeue(): Int {
-        val curr = head ?: throw NoSuchElementException()
+        val curr = head ?: throw NoSuchElementException("Queue is empty")
         head = curr.next
-        if (curr == tail) {
+        if (curr === tail) {
             tail = head
         }
         count--
         return curr.value
     }
 
-    fun peek(): Int = head?.value ?: throw NoSuchElementException()
+    fun peek(): Int = head?.value ?: throw NoSuchElementException("Queue is empty")
 
     fun isEmpty(): Boolean = count == 0
 

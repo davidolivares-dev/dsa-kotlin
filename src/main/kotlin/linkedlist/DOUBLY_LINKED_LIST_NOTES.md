@@ -17,9 +17,9 @@ Because tracking a `tail` reference is now actually useful (see below),
 doubly linked lists typically track both `head` and `tail`:
 
 ```
-head                                             tail
- |                                                 |
- v                                                 v
+     head                      tail
+       |                         |
+       v                         v
 [null| 1 |*]<-->[*| 2 |*]<-->[*| 3 |null]
 ```
 

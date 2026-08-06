@@ -7,16 +7,16 @@ class CircularBufferQueue(private val capacity: Int) {
     private var count = 0
 
     fun enqueue(value: Int) {
-        if (count == capacity) throw IllegalStateException("Queue is full")
+        check(count < capacity) { "Queue is full" }
         buffer[back] = value
-        back = (back + 1) % buffer.size
+        back = (back + 1) % capacity
         count++
     }
 
     fun dequeue(): Int {
         if (count == 0) throw NoSuchElementException("Queue is empty")
         val frontValue = buffer[front]
-        front = (front + 1) % buffer.size
+        front = (front + 1) % capacity
         count--
         return frontValue
     }

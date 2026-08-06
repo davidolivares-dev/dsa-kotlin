@@ -31,7 +31,7 @@ class DoublyLinkedList {
     }
 
     fun deleteFirst(): Int {
-        val first = head ?: throw NoSuchElementException()
+        val first = head ?: throw NoSuchElementException("List is empty")
         head = first.next
         head?.prev = null
         if (head == null) {
@@ -41,7 +41,7 @@ class DoublyLinkedList {
     }
 
     fun deleteLast(): Int {
-        val last = tail ?: throw NoSuchElementException()
+        val last = tail ?: throw NoSuchElementException("List is empty")
         tail = last.prev
         tail?.next = null
         if (tail == null) {
@@ -56,10 +56,10 @@ class DoublyLinkedList {
             if (curr.value == value) {
                 curr.next?.prev = curr.prev
                 curr.prev?.next = curr.next
-                if (curr == head) {
+                if (curr === head) {
                     head = curr.next
                 }
-                if (curr == tail) {
+                if (curr === tail) {
                     tail = curr.prev
                 }
                 return true

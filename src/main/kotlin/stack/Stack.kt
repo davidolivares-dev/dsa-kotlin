@@ -3,7 +3,9 @@ package stack
 class Stack {
     private val elements = mutableListOf<Int>()
 
-    fun push(value: Int) = elements.add(value)
+    fun push(value: Int) {
+        elements.add(value)
+    }
 
     fun pop(): Int = elements.removeLast()
 

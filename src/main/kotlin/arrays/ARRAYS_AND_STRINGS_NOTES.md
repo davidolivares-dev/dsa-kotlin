@@ -20,7 +20,7 @@ Appending or removing at the *end* is the cheap case — no shifting needed.
 insert "X" at index 2:
 
 [ a, b, c, d, e ]          before
-       ^ insert here
+        ^ insert here
 
 [ a, b, X, c, d, e ]       after — c, d, e all shifted right by one
 ```
@@ -56,14 +56,14 @@ through the same structure — often from opposite ends toward the middle.
 ```
 reversing [1, 2, 3, 4, 5] in place:
 
-  L                   R
+  L               R
 [ 1,  2,  3,  4,  5 ]      swap arr[L] and arr[R], then move both inward
 
-      L         R
-[ 5,  2,  3,  4,  1 ]
+      L       R
+[ 5,  2,  3,  4,  1 ]      swap again, move inward
 
-          LR
-[ 5,  4,  3,  2,  1 ]      L meets R (or crosses it) — done
+          ^
+[ 5,  4,  3,  2,  1 ]      L and R have met — loop ends, array reversed
 ```
 
 This is the same *technique* you'll use here for simple reversal/
