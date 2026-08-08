@@ -16,12 +16,11 @@ class HashTable {
         if (keyIndex == -1) { // new key-value pair
             bucket.add(key to value)
             size++
+            if (thresholdExceeded()) {
+                resize(capacity * 2)
+            }
         } else { // update key-value pair, no size increase
             bucket[keyIndex] = key to value
-        }
-
-        if (thresholdExceeded()) {
-            resize(capacity * 2)
         }
     }
 
@@ -55,8 +54,7 @@ class HashTable {
         val resizedArray = Array(capacity) { mutableListOf<Pair<Int, Int>>() }
         buckets.forEach { bucket ->
             bucket.forEach { pair ->
-                val newBucketIndex = bucketIndex(pair.first)
-                resizedArray[newBucketIndex].add(pair)
+                resizedArray[bucketIndex(pair.first)].add(pair)
             }
         }
         buckets = resizedArray
