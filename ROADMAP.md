@@ -24,7 +24,7 @@ next to its stub code, and a test file under the mirrored path in
 
 ### Phase 2 — Hashing
 - [x] Hash Table (collision handling, resizing)
-- [ ] Hash Set
+- [x] Hash Set
 
 ### Phase 3 — Trees
 - [ ] Binary Tree + traversals (DFS pre/in/post, BFS level-order)
