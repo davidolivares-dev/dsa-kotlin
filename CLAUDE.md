@@ -65,6 +65,17 @@ anchor IDs for real headings.
 4. Claude writes the test file, then walks through what it covers and
    why — so coverage is understood, not just "passing."
 
+## Retention checks at phase boundaries
+
+Before starting each new phase, run a short comprehension check that
+pulls ~4-5 questions from the Check Your Understanding banks of 2-3
+randomly chosen *earlier* topics — reaching back past the phase just
+finished, not reviewing it. Conversational, same style as a topic's own
+check. The banks are deliberately larger than any single check uses, so
+a revisit asks different questions than the first pass did. A gap found
+here doesn't block the new phase: note it, then re-drill that concept
+the next time a topic naturally touches it.
+
 ## `<TOPIC>_NOTES.md` conventions
 
 Covers: what the structure/algorithm is, its invariants, complexity
