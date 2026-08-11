@@ -13,7 +13,7 @@ private const val VALUES_BEFORE_FIRST_RESIZE = 6
 // that shifts on every resize. Compare sorted, never raw.
 private fun HashSet.sorted(): List<Int> = toList().sorted()
 
-private fun setOf(vararg values: Int): HashSet {
+private fun intSetOf(vararg values: Int): HashSet {
     val set = HashSet()
     values.forEach { set.add(it) }
     return set
@@ -46,14 +46,14 @@ class HashSetTest : FunSpec({
 
         test("values that collide are both stored and both found") {
             // 5 and 13 hash to the same bucket at capacity 8
-            val set = setOf(5, 13)
+            val set = intSetOf(5, 13)
             set.contains(5) shouldBe true
             set.contains(13) shouldBe true
             set.size() shouldBe 2
         }
 
         test("negative values are stored and retrieved unchanged") {
-            val set = setOf(-1, -3, -1000)
+            val set = intSetOf(-1, -3, -1000)
             set.contains(-1) shouldBe true
             set.contains(-3) shouldBe true
             set.contains(-1000) shouldBe true
@@ -62,12 +62,12 @@ class HashSetTest : FunSpec({
 
         test("adding a negative value does not make its positive appear") {
             // guards the resize bug where a value was normalised on store
-            val set = setOf(-3)
+            val set = intSetOf(-3)
             set.contains(3) shouldBe false
         }
 
         test("zero is an ordinary value") {
-            val set = setOf(0)
+            val set = intSetOf(0)
             set.contains(0) shouldBe true
             set.isEmpty() shouldBe false
             set.size() shouldBe 1
@@ -80,26 +80,26 @@ class HashSetTest : FunSpec({
         }
 
         test("false for a value never added") {
-            setOf(1, 2, 3).contains(99) shouldBe false
+            intSetOf(1, 2, 3).contains(99) shouldBe false
         }
 
         test("does not match on bucket occupancy alone") {
             // 21 shares a bucket with 5 at capacity 8 but was never added
-            val set = setOf(5)
+            val set = intSetOf(5)
             set.contains(21) shouldBe false
         }
     }
 
     context("remove") {
         test("removing a present value returns true and drops the size") {
-            val set = setOf(1, 2)
+            val set = intSetOf(1, 2)
             set.remove(1) shouldBe true
             set.size() shouldBe 1
             set.contains(1) shouldBe false
         }
 
         test("removing an absent value returns false and leaves size alone") {
-            val set = setOf(1, 2)
+            val set = intSetOf(1, 2)
             set.remove(99) shouldBe false
             set.size() shouldBe 2
             set.sorted() shouldBe listOf(1, 2)
@@ -110,21 +110,21 @@ class HashSetTest : FunSpec({
         }
 
         test("removing one of two colliding values leaves the other") {
-            val set = setOf(5, 13)
+            val set = intSetOf(5, 13)
             set.remove(5) shouldBe true
             set.contains(13) shouldBe true
             set.size() shouldBe 1
         }
 
         test("a removed value can be added again as new") {
-            val set = setOf(7)
+            val set = intSetOf(7)
             set.remove(7)
             set.add(7) shouldBe true
             set.size() shouldBe 1
         }
 
         test("removing the same value twice returns false the second time") {
-            val set = setOf(7)
+            val set = intSetOf(7)
             set.remove(7) shouldBe true
             set.remove(7) shouldBe false
         }
@@ -138,7 +138,7 @@ class HashSetTest : FunSpec({
         }
 
         test("empty again once every value is removed") {
-            val set = setOf(1, 2, 3)
+            val set = intSetOf(1, 2, 3)
             set.remove(1)
             set.remove(2)
             set.remove(3)
@@ -166,7 +166,7 @@ class HashSetTest : FunSpec({
         }
 
         test("yields every value exactly once, including collided ones") {
-            val set = setOf(5, 13, -3, 0, 99)
+            val set = intSetOf(5, 13, -3, 0, 99)
             set.sorted() shouldBe listOf(-3, 0, 5, 13, 99)
         }
 
@@ -177,7 +177,7 @@ class HashSetTest : FunSpec({
         }
 
         test("length always agrees with size()") {
-            val set = setOf(1, 2, 3, 4, 5)
+            val set = intSetOf(1, 2, 3, 4, 5)
             set.toList().size shouldBe set.size()
             set.remove(3)
             set.toList().size shouldBe set.size()
@@ -221,7 +221,7 @@ class HashSetTest : FunSpec({
 
         test("values that collided before a resize both survive being split") {
             // 5 and 13 share a bucket at capacity 8, separate at 16
-            val set = setOf(5, 13)
+            val set = intSetOf(5, 13)
             for (value in 200 until 210) {
                 set.add(value)
             }
@@ -259,35 +259,35 @@ class HashSetTest : FunSpec({
 
     context("union") {
         test("contains everything from either set, overlap included once") {
-            val a = setOf(1, 2, 3, 4)
-            val b = setOf(3, 4, 5)
+            val a = intSetOf(1, 2, 3, 4)
+            val b = intSetOf(3, 4, 5)
             a.union(b).sorted() shouldBe listOf(1, 2, 3, 4, 5)
         }
 
         test("is symmetric") {
-            val a = setOf(1, 2, 3, 4)
-            val b = setOf(3, 4, 5)
+            val a = intSetOf(1, 2, 3, 4)
+            val b = intSetOf(3, 4, 5)
             a.union(b).sorted() shouldBe b.union(a).sorted()
         }
 
         test("with an empty set returns the original values") {
-            val a = setOf(1, 2, 3)
+            val a = intSetOf(1, 2, 3)
             a.union(HashSet()).sorted() shouldBe listOf(1, 2, 3)
             HashSet().union(a).sorted() shouldBe listOf(1, 2, 3)
         }
 
         test("of disjoint sets contains both entirely") {
-            setOf(1, 2).union(setOf(90, 91)).sorted() shouldBe listOf(1, 2, 90, 91)
+            intSetOf(1, 2).union(intSetOf(90, 91)).sorted() shouldBe listOf(1, 2, 90, 91)
         }
 
         test("with itself changes nothing") {
-            val a = setOf(1, 2, 3)
+            val a = intSetOf(1, 2, 3)
             a.union(a).sorted() shouldBe listOf(1, 2, 3)
         }
 
         test("leaves both operands unmodified") {
-            val a = setOf(1, 2, 3, 4)
-            val b = setOf(3, 4, 5)
+            val a = intSetOf(1, 2, 3, 4)
+            val b = intSetOf(3, 4, 5)
             a.union(b)
             a.sorted() shouldBe listOf(1, 2, 3, 4)
             b.sorted() shouldBe listOf(3, 4, 5)
@@ -296,35 +296,35 @@ class HashSetTest : FunSpec({
 
     context("intersection") {
         test("contains only values present in both") {
-            val a = setOf(1, 2, 3, 4)
-            val b = setOf(3, 4, 5)
+            val a = intSetOf(1, 2, 3, 4)
+            val b = intSetOf(3, 4, 5)
             a.intersection(b).sorted() shouldBe listOf(3, 4)
         }
 
         test("is symmetric") {
-            val a = setOf(1, 2, 3, 4)
-            val b = setOf(3, 4, 5)
+            val a = intSetOf(1, 2, 3, 4)
+            val b = intSetOf(3, 4, 5)
             a.intersection(b).sorted() shouldBe b.intersection(a).sorted()
         }
 
         test("with an empty set is empty") {
-            val a = setOf(1, 2, 3)
+            val a = intSetOf(1, 2, 3)
             a.intersection(HashSet()).toList() shouldBe emptyList()
             HashSet().intersection(a).toList() shouldBe emptyList()
         }
 
         test("of disjoint sets is empty") {
-            setOf(1, 2).intersection(setOf(90, 91)).toList() shouldBe emptyList()
+            intSetOf(1, 2).intersection(intSetOf(90, 91)).toList() shouldBe emptyList()
         }
 
         test("with itself returns everything") {
-            val a = setOf(1, 2, 3)
+            val a = intSetOf(1, 2, 3)
             a.intersection(a).sorted() shouldBe listOf(1, 2, 3)
         }
 
         test("leaves both operands unmodified") {
-            val a = setOf(1, 2, 3, 4)
-            val b = setOf(3, 4, 5)
+            val a = intSetOf(1, 2, 3, 4)
+            val b = intSetOf(3, 4, 5)
             a.intersection(b)
             a.sorted() shouldBe listOf(1, 2, 3, 4)
             b.sorted() shouldBe listOf(3, 4, 5)
@@ -333,38 +333,38 @@ class HashSetTest : FunSpec({
 
     context("difference") {
         test("contains values in this set but not the other") {
-            val a = setOf(1, 2, 3, 4)
-            val b = setOf(3, 4, 5)
+            val a = intSetOf(1, 2, 3, 4)
+            val b = intSetOf(3, 4, 5)
             a.difference(b).sorted() shouldBe listOf(1, 2)
         }
 
         test("is NOT symmetric") {
-            val a = setOf(1, 2, 3, 4)
-            val b = setOf(3, 4, 5)
+            val a = intSetOf(1, 2, 3, 4)
+            val b = intSetOf(3, 4, 5)
             a.difference(b).sorted() shouldBe listOf(1, 2)
             b.difference(a).sorted() shouldBe listOf(5)
         }
 
         test("minus an empty set returns the original values") {
-            setOf(1, 2, 3).difference(HashSet()).sorted() shouldBe listOf(1, 2, 3)
+            intSetOf(1, 2, 3).difference(HashSet()).sorted() shouldBe listOf(1, 2, 3)
         }
 
         test("an empty set minus anything is empty") {
-            HashSet().difference(setOf(1, 2, 3)).toList() shouldBe emptyList()
+            HashSet().difference(intSetOf(1, 2, 3)).toList() shouldBe emptyList()
         }
 
         test("minus itself is empty") {
-            val a = setOf(1, 2, 3)
+            val a = intSetOf(1, 2, 3)
             a.difference(a).toList() shouldBe emptyList()
         }
 
         test("minus a disjoint set returns the original values") {
-            setOf(1, 2).difference(setOf(90, 91)).sorted() shouldBe listOf(1, 2)
+            intSetOf(1, 2).difference(intSetOf(90, 91)).sorted() shouldBe listOf(1, 2)
         }
 
         test("leaves both operands unmodified") {
-            val a = setOf(1, 2, 3, 4)
-            val b = setOf(3, 4, 5)
+            val a = intSetOf(1, 2, 3, 4)
+            val b = intSetOf(3, 4, 5)
             a.difference(b)
             a.sorted() shouldBe listOf(1, 2, 3, 4)
             b.sorted() shouldBe listOf(3, 4, 5)
@@ -375,14 +375,14 @@ class HashSetTest : FunSpec({
         test("(a - b) union (a intersect b) reconstructs a") {
             // cross-checks all three against each other: a bug in any one
             // of them breaks this identity
-            val a = setOf(1, 2, 3, 4)
-            val b = setOf(3, 4, 5)
+            val a = intSetOf(1, 2, 3, 4)
+            val b = intSetOf(3, 4, 5)
             a.difference(b).union(a.intersection(b)).sorted() shouldBe a.sorted()
         }
 
         test("union minus intersection leaves values unique to one side") {
-            val a = setOf(1, 2, 3, 4)
-            val b = setOf(3, 4, 5)
+            val a = intSetOf(1, 2, 3, 4)
+            val b = intSetOf(3, 4, 5)
             a.union(b).difference(a.intersection(b)).sorted() shouldBe listOf(1, 2, 5)
         }
 
