@@ -69,10 +69,21 @@ anchor IDs for real headings.
 
 Covers: what the structure/algorithm is, its invariants, complexity
 (time/space), when to reach for it. Include a diagram wherever it would
-make a concept clearer than prose alone — ASCII art for linear structures
-(arrays, linked lists, stacks, call stacks) and Mermaid diagrams for trees
-and graphs (GitHub renders Mermaid natively in Markdown, no extra
-tooling). Don't force a diagram where one doesn't add clarity. Ends with a
+make a concept clearer than prose alone. Don't force one where it doesn't
+add clarity.
+
+- **ASCII art** for linear structures (arrays, linked lists, stacks, call
+  stacks) **and for binary trees.** Mermaid's auto-layout centres a node
+  that has only one child, which destroys exactly the left/right
+  distinction a binary tree diagram exists to show — and edge labels to
+  compensate make it read like a flowchart rather than a tree.
+- **Mermaid** for graphs, and for trees where ASCII stops scaling (a trie
+  with many children per node, or anything wide). GitHub renders it
+  natively, no tooling needed.
+- **Generate ASCII diagrams with a script that asserts the column math,
+  never by hand-counting spaces.** Every hand-aligned diagram in this repo
+  turned out to have an off-by-N somewhere — arrows pointing at the wrong
+  element, or past the end of the structure entirely. Ends with a
 **"Check Your Understanding"** section: a bank of 6-10 conceptual
 questions (invariants, complexity, edge cases — never "write the code for
 X"). The bank is deliberately larger than any one check uses, so
