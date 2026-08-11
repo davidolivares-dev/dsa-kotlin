@@ -20,6 +20,14 @@ class RecursionTest : FunSpec({
         test("throws IllegalArgumentException for negative n") {
             shouldThrow<IllegalArgumentException> { factorial(-1) }
         }
+
+        test("computes 20!, the largest factorial that fits in a Long") {
+            factorial(20) shouldBe 2432902008176640000L
+        }
+
+        test("throws for n = 21 rather than silently overflowing") {
+            shouldThrow<IllegalArgumentException> { factorial(21) }
+        }
     }
 
     context("fibonacci") {
@@ -46,6 +54,10 @@ class RecursionTest : FunSpec({
 
         test("sums digits of a multi-digit number") {
             sumDigits(1234) shouldBe 10
+        }
+
+        test("throws IllegalArgumentException for negative n") {
+            shouldThrow<IllegalArgumentException> { sumDigits(-12) }
         }
     }
 
