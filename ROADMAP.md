@@ -28,7 +28,7 @@ next to its stub code, and a test file under the mirrored path in
 
 ### Phase 3 — Trees
 - [x] Binary Tree + traversals (DFS pre/in/post, BFS level-order)
-- [ ] Binary Search Tree (insert/delete/search)
+- [x] Binary Search Tree (insert/delete/search)
 - [ ] Trie
 
 ### Phase 4 — Heaps
