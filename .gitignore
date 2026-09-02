@@ -5,3 +5,7 @@ out/
 .idea/
 *.iml
 .DS_Store
+
+# Cold reimplementations written during a retention drill. Scratch work by
+# design — the result is discussed, not committed.
+src/drill/

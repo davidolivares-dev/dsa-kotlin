@@ -11,28 +11,21 @@ building Kotlin fluency, so occasional syntax friction is expected and
 normal, separate from the DSA learning goal.
 
 See `ROADMAP.md` for the full topic sequence and phase rationale, and
-`GLOSSARY.md` for terminology used in `*_NOTES.md` files. Each
-`GLOSSARY.md` term must be a `##` heading, not a bold paragraph —
-`*_NOTES.md` files link into specific terms via anchors (e.g.
-`GLOSSARY.md#amortized-complexity`), and GitHub only auto-generates
-anchor IDs for real headings.
+`GLOSSARY.md` for terminology used in `*_NOTES.md` files.
 
 ## Division of labor — do not blur this line
 
 - **The user writes all code that ends up in `src/main/kotlin/`,
   including the stub itself.** `<TOPIC>_TASK.md` contains an example stub
-  (class/data class declarations, function signatures with `TODO()`
-  bodies) as a Kotlin code block for reference — the user types or
-  copy-pastes it into the real file themselves, then implements it. Claude
-  does not create or edit files under `src/main/kotlin/`, **except to
-  apply automated formatting** (e.g. running `./gradlew ktlintFormat`, or
-  an equivalent whitespace-only fix) — that's mechanical style
-  enforcement, not implementation, and is the whole point of having a
-  formatter.
-- Never write or complete the actual implementation logic for the user,
-  even if asked something that sounds like "just show me." Give hints, ask
-  guiding questions, point at the invariant they're violating — the
-  `TODO()` bodies are theirs to fill in.
+  (class declarations, signatures with `TODO()` bodies) as a Kotlin code
+  block; the user copies it into the real file, then implements it.
+  Claude does not create or edit files there, **except to apply automated
+  formatting** — `./gradlew ktlintFormat` or an equivalent whitespace-only
+  fix is mechanical style enforcement, not implementation.
+- That rule covers chat as much as files: **never hand over the
+  implementation logic**, even when asked something that sounds like
+  "just show me." Give hints, ask guiding questions, point at the
+  invariant being violated. The `TODO()` bodies are the user's to fill.
 - **Syntax help is fine and different from this.** If the user is blocked
   on Kotlin mechanics (e.g. "how does `when` work with sealed classes",
   generic type bounds, `Comparable` implementation syntax), showing a
@@ -67,14 +60,44 @@ anchor IDs for real headings.
 
 ## Retention checks at phase boundaries
 
-Before starting each new phase, run a short comprehension check that
-pulls ~4-5 questions from the Check Your Understanding banks of 2-3
-randomly chosen *earlier* topics — reaching back past the phase just
-finished, not reviewing it. Conversational, same style as a topic's own
-check. The banks are deliberately larger than any single check uses, so
-a revisit asks different questions than the first pass did. A gap found
-here doesn't block the new phase: note it, then re-drill that concept
-the next time a topic naturally touches it.
+Before starting each new phase, run a short conversational check — **no
+code written**. Draw on two sources:
+
+- **Concepts**, from the Check Your Understanding banks of 2-3 randomly
+  chosen *earlier* topics, reaching back past the phase just finished.
+- **Implementation reasoning**, generated from the committed code rather
+  than from the banks: where a counter is incremented and why not
+  elsewhere, what a base case returns and why that value, why a helper
+  returns what it returns, which case a piece of recursion can and
+  cannot reach.
+
+The second kind matters because a topic can be explained fluently while
+remaining unwritable, and the banks only ever test the explaining. Ask
+about the code that exists, not just the idea behind it.
+
+A gap found here doesn't block the new phase: note it, and re-drill that
+concept when a topic naturally touches it. Suggest at most one drill,
+never a backlog.
+
+## Retention drills
+
+Ad hoc, at the user's discretion, and the only thing that actually
+verifies retention: reimplement a structure cold and let the real tests
+judge it.
+
+Copy the stub from `<TOPIC>_TASK.md` into `src/drill/kotlin/<package>/`,
+implement it with the notes and prior conversation closed, then run
+`./gradlew drillTest`. It runs only the suites whose implementations are
+present under `src/drill/`, so there's no test filter to remember. The
+committed implementation is untouched and can be diffed against
+afterwards — *how* a cold attempt differs is often more telling than
+whether it passed.
+
+`src/drill/` is gitignored and `drillTest` is not part of `check` or CI.
+A failing drill is information, not a broken build.
+
+Afterwards, discuss what was hard and record it as a memory note. There
+is no log file; the conversation plus memory is the record.
 
 ## `<TOPIC>_NOTES.md` conventions
 
@@ -94,11 +117,13 @@ add clarity.
 - **Generate ASCII diagrams with a script that asserts the column math,
   never by hand-counting spaces.** Every hand-aligned diagram in this repo
   turned out to have an off-by-N somewhere — arrows pointing at the wrong
-  element, or past the end of the structure entirely. Ends with a
-**"Check Your Understanding"** section: a bank of 6-10 conceptual
-questions (invariants, complexity, edge cases — never "write the code for
-X"). The bank is deliberately larger than any one check uses, so
-revisiting a topic later isn't reciting memorized answers.
+  element, or past the end of the structure entirely.
+
+Every topic's notes end with a **"Check Your Understanding"** section: a
+bank of 6-10 conceptual questions (invariants, complexity, edge cases —
+never "write the code for X"). The bank is deliberately larger than any
+one check uses, so revisiting a topic later isn't reciting memorized
+answers.
 
 ## `<TOPIC>_TASK.md` conventions
 
@@ -132,13 +157,21 @@ directly (e.g. Fibonacci's definition *is* its recursive case).
   `src/test/kotlin/<package>/`.
 - Test framework: Kotest (`FunSpec` style unless a topic's shape calls for
   something else).
+- Each `GLOSSARY.md` term must be a `##` heading, not a bold paragraph.
+  `*_NOTES.md` files link into specific terms via anchors (e.g.
+  `GLOSSARY.md#amortized-complexity`), and GitHub only auto-generates
+  anchor IDs for real headings.
 
 ## Commit style
 
 - Tim Pope 50/72: imperative subject line ≤50 chars, blank line, body
   wrapped at 72 chars.
 - No `Co-Authored-By` trailer.
-- Daily commits are the expected cadence.
+- One commit per PR — squash locally before pushing rather than stacking
+  follow-up commits.
+- Commit when a unit of work is finished. Progress on this repo comes in
+  bursts with gaps between them; that's expected, and a stale branch is
+  not a problem to apologise for.
 - **Don't restate in a commit what the notes or tests already cover.**
   Language gotchas, complexity explanations, and how a structure works
   belong in `<TOPIC>_NOTES.md`/`<TOPIC>_TASK.md`; edge cases belong in
@@ -146,11 +179,14 @@ directly (e.g. Fibonacci's definition *is* its recursive case).
   looks the way it does* — decisions and rejected alternatives that
   aren't visible in the diff. If a paragraph could sit unchanged in the
   notes, it belongs there instead.
+- **Keep the body short.** Two or three short paragraphs is plenty; one
+  is often right. State a decision, don't argue for it — if a paragraph
+  reads like it's explaining a concept rather than recording a choice,
+  cut it.
 
 ## PR description
 
-One commit per PR — squash locally before pushing rather than stacking
-follow-up commits. Three sections, in this order, and nothing else:
+Three sections, in this order, and nothing else:
 
 1. `## <Structure or algorithm name>` — a short paragraph on what it is
    and what problem it solves. Enough that someone who hasn't read the
